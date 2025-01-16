@@ -5,6 +5,8 @@
 
 const int connectionTimeout = 10000;
 
+const int pirPin = 15;
+
 void setup() {
   Serial.begin(115200);
 
@@ -35,7 +37,19 @@ void setup() {
   } else {
     Serial.println("\nFailed to connect to Wi-Fi within the timeout period.");
   }
+
+  // Set the PIR sensor as input
+  pinMode(pirPin, INPUT);
+
 }
 
 void loop() {
+  // Read the value of the PIR sensor
+  int pirState = digitalRead(pirPin);  
+
+  // If movement is detected for now print onto console and delay for 5 seconds
+  if (pirState == HIGH) {
+    Serial.println("Motion Detected!");
+    delay(1000 * 5);
+  } 
 }
